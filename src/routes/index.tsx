@@ -408,17 +408,29 @@ function Landing({ onEnter }: { onEnter: () => void }) {
 }
 
 /* ---------- Ambient music ---------- */
+// Coloque o arquivo em src/assets/music.mp3 — se não existir, o botão simplesmente não aparece.
+const musicModules = import.meta.glob("@/assets/music.mp3", {
+  eager: true,
+  query: "?url",
+  import: "default",
+}) as Record<string, string>;
+const MUSIC_URL = Object.values(musicModules)[0];
+
 function MusicToggle() {
   const [playing, setPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   useEffect(() => {
-    audioRef.current = new Audio(
-      "https://cdn.pixabay.com/audio/2022/10/25/audio_5ea20cb6b0.mp3",
-    );
-    audioRef.current.loop = true;
-    audioRef.current.volume = 0.35;
+    if (!MUSIC_URL) return;
+    const audio = new Audio(MUSIC_URL);
+    audio.loop = true;
+    audio.volume = 0.15; // bem baixinho
+    audioRef.current = audio;
+    audio
+      .play()
+      .then(() => setPlaying(true))
+      .catch(() => setPlaying(false));
     return () => {
-      audioRef.current?.pause();
+      audio.pause();
       audioRef.current = null;
     };
   }, []);
@@ -432,6 +444,8 @@ function MusicToggle() {
       setPlaying(true);
     }
   };
+  if (!MUSIC_URL) return null;
+
   return (
     <button
       onClick={toggle}
