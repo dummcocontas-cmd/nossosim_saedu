@@ -1,0 +1,197 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-cream: var(--cream);
+  --color-parchment: var(--parchment);
+  --color-olive: var(--olive);
+  --color-olive-soft: var(--olive-soft);
+  --color-sage: var(--sage);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-border: var(--border);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+
+  --font-display: "Great Vibes", cursive;
+  --font-script: "Parisienne", cursive;
+  --font-serif: "Cormorant Garamond", serif;
+  --font-body: "Libre Baskerville", serif;
+  --font-editorial: "Playfair Display", serif;
+
+  --shadow-soft: 0 25px 60px -30px color-mix(in oklab, var(--olive) 22%, transparent);
+  --shadow-card: 0 10px 40px -20px color-mix(in oklab, var(--olive) 20%, transparent);
+}
+
+:root {
+  --radius: 0.25rem;
+
+  --cream: oklch(0.985 0.006 85);       /* #FCFBF8 */
+  --parchment: oklch(0.965 0.008 85);   /* #F8F6F2 */
+  --olive: oklch(0.44 0.045 120);       /* #5F6847 */
+  --olive-soft: oklch(0.55 0.04 120);
+  --sage: oklch(0.74 0.03 130);         /* #AEB7A1 */
+  --gold: oklch(0.72 0.09 80);          /* #C6A86A */
+  --gold-soft: oklch(0.82 0.07 82);
+  --ink: oklch(0.36 0.005 80);          /* #4B4B4B */
+  --ink-soft: oklch(0.5 0.008 80);
+  --border: oklch(0.9 0.012 85);        /* #E7E2D9 */
+
+  --background: var(--cream);
+  --foreground: var(--ink);
+  --card: var(--cream);
+  --card-foreground: var(--ink);
+  --popover: var(--cream);
+  --popover-foreground: var(--ink);
+  --primary: var(--olive);
+  --primary-foreground: var(--cream);
+  --secondary: var(--parchment);
+  --secondary-foreground: var(--olive);
+  --muted: var(--parchment);
+  --muted-foreground: var(--ink-soft);
+  --accent: var(--gold);
+  --accent-foreground: var(--cream);
+  --destructive: oklch(0.55 0.18 25);
+  --destructive-foreground: var(--cream);
+  --input: var(--border);
+  --ring: var(--gold);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "liga", "kern";
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-editorial);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+}
+
+@utility font-display {
+  font-family: var(--font-display);
+}
+@utility font-script {
+  font-family: var(--font-script);
+}
+@utility font-serif-c {
+  font-family: var(--font-serif);
+}
+@utility font-editorial {
+  font-family: var(--font-editorial);
+}
+
+@utility gold-rule {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in oklab, var(--gold) 80%, transparent) 50%,
+    transparent 100%
+  );
+}
+
+@utility eyebrow {
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  letter-spacing: 0.35em;
+  font-size: 0.7rem;
+  color: var(--olive);
+}
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-16px) rotate(1.2deg); }
+}
+@keyframes sway {
+  0%, 100% { transform: rotate(-1.2deg); }
+  50% { transform: rotate(1.2deg); }
+}
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0.6) rotate(-12deg); }
+  50% { opacity: 1; transform: scale(1) rotate(12deg); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); filter: blur(4px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0px); }
+}
+@keyframes drift {
+  from { transform: translateY(0) translateX(0); opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 0.6; }
+  100% { transform: translateY(-120vh) translateX(40px); opacity: 0; }
+}
+@keyframes handTap {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(7px); }
+}
+@keyframes sealPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(198,168,106,0.35); }
+  50% { box-shadow: 0 0 0 18px rgba(198,168,106,0); }
+}
+
+@utility animate-floaty { animation: floaty 7s ease-in-out infinite; }
+@utility animate-sway { animation: sway 5s ease-in-out infinite; transform-origin: top center; }
+@utility animate-sparkle { animation: sparkle 2.8s ease-in-out infinite; }
+@utility animate-fadeUp { animation: fadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@utility animate-drift { animation: drift linear infinite; }
+@utility animate-handTap { animation: handTap 1.6s ease-in-out infinite; }
+@utility animate-sealPulse { animation: sealPulse 2.4s ease-out infinite; }
+
+/* Chapter page — book-like turn */
+.chapter-page {
+  position: relative;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+.chapter-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 60% at 50% 0%, transparent 60%, color-mix(in oklab, var(--olive) 6%, transparent) 100%),
+    linear-gradient(90deg, color-mix(in oklab, var(--olive) 5%, transparent) 0%, transparent 6%, transparent 94%, color-mix(in oklab, var(--olive) 5%, transparent) 100%);
+  opacity: 0.5;
+}
