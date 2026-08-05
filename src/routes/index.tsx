@@ -565,7 +565,7 @@ function Gallery() {
 type GuestMessage = { name: string; text: string };
 
 const RECADOS_URL =
-  "https://script.google.com/macros/s/AKfycbyJJsxHnRdneDkq2v4UNep7KY4YERVYTFOv5W7s0LwtMllsjUauZ1iLqDHNYkweABGs/exec";
+  "https://script.google.com/macros/s/AKfycbw12EVYs6IH6MJtt4bYAj2lLynmehI5Y4zN0s6R1iNOtd8mKAUyLyCy6Ex7t43xUn2Yqg/exec";
 
 function MessageWall() {
   const [messages, setMessages] = useState<GuestMessage[]>(GUEST_MESSAGES);
